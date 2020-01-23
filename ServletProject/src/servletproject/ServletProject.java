@@ -1,21 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package servletproject;
+import java.io.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 
-/**
- *
- * @author galva
- */
-public class ServletProject {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+@WebServlet(urlPatterns={"/baz"})
+public class ServletProject extends HttpServlet{
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+        resp.setContentType("text/plain");
+        var pw = resp.getWriter();
+        var name = req.getParameter("username");
+        var ageStr = req.getParameter("age");
+        if( name == null || ageStr == null ){
+            pw.printf("Missing parameter");
+            return;
+        }
+        try{
+            int age = Integer.parseInt(ageStr);
+            pw.printf("In five years, %s will be %d years old.", name,age+5);
+        } catch(NumberFormatException e){
+            pw.printf("Bad age format");
+            return;
+        }
     }
-    
 }
