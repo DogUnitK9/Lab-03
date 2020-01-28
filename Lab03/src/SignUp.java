@@ -20,6 +20,9 @@ public class SignUp extends HttpServlet
             sess.setAttribute("user", user );
             pw.printf("Logged in "+name + " as user: " + user);
         }
+        var Person = new User(user,name,pass);
+        Main.users.add(Person);
+        
     }
 
 }
