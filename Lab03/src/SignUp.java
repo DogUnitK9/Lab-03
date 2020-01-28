@@ -16,9 +16,7 @@ public class SignUp extends HttpServlet
         if( user == null || name == null || pass == null ){
             pw.printf("Missing Parameter: Please login/signup by using ?user=' '&name=' '&password=' ' ");
         } else {
-            var sess = req.getSession();
-            sess.setAttribute("user", user );
-            pw.printf("Logged in "+name + " as user: " + user);
+            pw.printf("Signed up "+name + " as user: " + user);
         }
         var Person = new User(user,name,pass);
         Main.users.add(Person);
